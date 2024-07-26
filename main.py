@@ -11,7 +11,7 @@ from engine import ModelTrainer
 # Constants
 BATCH_SIZE = 32
 NUM_WORKERS = os.cpu_count()
-SEED = 42
+NUM_EPOCHS = 1
 
 # Set device
 device = 'cuda' if torch.cuda.is_available() else 'mps' if torch.backends.mps.is_available() else 'cpu'
@@ -47,9 +47,7 @@ def main():
     optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
     criterion = nn.CrossEntropyLoss()
 
-    # Training loop with tqdm
-    NUM_EPOCHS = 1
-
+    # Training loop
     params = ModelTrainer(model=model,
                     train_dataloader=train_loader,
                     test_dataloader=test_loader,
