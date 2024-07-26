@@ -26,12 +26,8 @@ if not os.path.exists(dataset_path):
         print("[INFO] Falling back to manual dataset loading...")
 else:
     print("[INFO] Dataset already exists. Skipping download.")
-    from torchvision.datasets import ImageFolder
-
-    # Load data from local directory
-    train_dataset = ImageFolder(root=os.path.join(dataset_path, 'train'), transform=transform)
-    test_dataset = ImageFolder(root=os.path.join(dataset_path, 'test'), transform=transform)
-
+    train_dataset = Food101(root='src', split='train', transform=transform, download=False)
+    test_dataset = Food101(root='src', split='test', transform=transform, download=False)
 # Create data loaders
 train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True)
 test_loader = DataLoader(test_dataset, batch_size=32, shuffle=False)
